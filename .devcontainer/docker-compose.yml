@@ -7,5 +7,3 @@ services:
     volumes:
       - ..:/workspaces/${LOCAL_WORKSPACE_FOLDER_BASENAME}
     working_dir: /workspaces/${LOCAL_WORKSPACE_FOLDER_BASENAME}
-    ports:
-      - "5678:5678"
