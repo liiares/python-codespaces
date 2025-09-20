@@ -7,36 +7,5 @@ services:
     volumes:
       - ..:/workspaces/${LOCAL_WORKSPACE_FOLDER_BASENAME}
     working_dir: /workspaces/${LOCAL_WORKSPACE_FOLDER_BASENAME}
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      MYSQL_HOST: db
-      MYSQL_PORT: "3306"
-      MYSQL_USER: root
-      MYSQL_PASSWORD: example
-      MYSQL_DATABASE: appdb
-      DEBUG: "0"        # set to "1" to make main.py wait for debugger
     ports:
-      - "5678:5678"     # debugpy attach
-    # Codespaces adds its own user; this base image is compatible.
-
-  db:
-    image: mysql:8.0
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: appdb
-      MYSQL_TCP_PORT: 3306
-    ports:
-      - "3306:3306"
-    healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -proot || mysqladmin ping -h 127.0.0.1 -pexample"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-volumes:
-  mysql_data:
+      - "5678:5678"
